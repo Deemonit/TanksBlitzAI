@@ -1,0 +1,1 @@
+MY_HEALTH_COORDINATES = (slice(500,1400),slice(400,1900))

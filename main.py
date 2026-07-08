@@ -1,29 +1,23 @@
-import mss
 import numpy as np
 from PIL import Image
-from FrameRegions import MyHealthCoordinates 
+from frame_regions import MY_HEALTH_COORDINATES
 
-with mss.MSS() as mssObject:
-    
-    #Получаем параметры нужного монитора
-    monitor = mssObject.monitors[1]
+import screen_capture as scr_cap
 
-    #Получаем сырой объект-снимок экрана по параметрам нужного монитора
-    rawFrame = mssObject.grab(monitor)
+#Переводим его в массив для удобства работы
+raw_full_screen = scr_cap.get_raw_full_screen()
 
-    #Переводим его в массив для удобства работы
-    fullFrame = np.array(rawFrame)
+full_frame = np.array(raw_full_screen)
 
-    #Получаем нужную область массива-кадра. Это нужная область изображения, но всё ещё просто массив
-    
-    #MyHealthCoordinates = (slice(200,1000),slice(400,1900))
-    #y,x
-    slicedImageArray = fullFrame[MyHealthCoordinates]
+#Получаем нужную область массива-кадра. Это нужная область изображения, но всё ещё просто массив
+   
+#y,x
+sliced_image_array = full_frame[MY_HEALTH_COORDINATES]
 
-    #Переводим массив пикселей с каналом альфа в изображение
-    slicedImage = Image.fromarray(slicedImageArray,"RGBA")
+#Переводим массив пикселей с каналом альфа в изображение
+sliced_image = Image.fromarray(sliced_image_array,"RGBA")
 
-    #Сохраняем выделеную область изображения в корень проекта
-    slicedImage.save("кусок.png")
+#Сохраняем выделеную область изображения в корень проекта
+sliced_image.save("кусок.png")
 
-    print("готово") 
+print("готово") 
