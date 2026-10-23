@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image
-from frame_regions import MY_HEALTH_COORDINATES
+from frame_regions import ROI
 
 import screen_capture as scr_cap
 
@@ -12,7 +12,7 @@ full_frame = np.array(raw_full_screen)
 #Получаем нужную область массива-кадра. Это нужная область изображения, но всё ещё просто массив
    
 #y,x
-sliced_image_array = full_frame[MY_HEALTH_COORDINATES]
+sliced_image_array = full_frame[ROI.my_hp]
 
 #Переводим массив пикселей с каналом альфа в изображение
 sliced_image = Image.fromarray(sliced_image_array,"RGBA")
